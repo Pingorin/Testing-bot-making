@@ -1,17 +1,16 @@
+# info.py
+
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from a .env file (for local testing)
 load_dotenv() 
 
-# 1. BOT TOKEN
-# Get your token from @BotFather on Telegram and set it as an environment variable
+# 1. BOT TOKEN (Required)
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
 
 # 2. PHOTO URL (Optional)
-# If you want to use a direct public image URL instead of a local 'photo.jpg' file, 
-# you can define it here or in your environment variables.
 PHOTO_URL = os.environ.get("PHOTO_URL", None)
 
-# Note: PRODUCTION deployment (जैसे Render) में, आपको BOT_TOKEN को environment variable 
-# के रूप में set करना होगा।
+# 3. RENDER ENVIRONMENT VARIABLES (Render खुद सेट करेगा)
+# Render Web Services के लिए $PORT और $WEBHOOK_URL चाहिए।
+# हम इन्हें सीधे bot.py में os.environ से उठाएंगे।
