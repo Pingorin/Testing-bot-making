@@ -1,19 +1,14 @@
 version: 1
 services:
-  - type: web
-    name: telegram-photo-bot
+  - type: worker
+    name: telegram-polling-bot
     env: python
     dockerfilePath: Dockerfile
-    startCommand: python bot.py
-    port: 8080 
+    # Updated Start Command
+    startCommand: python3 bot.py  # <--- Change applied here
     envVars:
       - key: BOT_TOKEN
         sync: false
-      - key: WEBHOOK_URL
-        fromService:
-          type: web
-          name: telegram-photo-bot
-          property: hostport
       - key: PYTHON_VERSION
-        value: 3.10.8  # <--- Version updated here
+        value: 3.10.8
         
