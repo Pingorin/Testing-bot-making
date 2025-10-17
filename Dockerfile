@@ -1,5 +1,7 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11.5-slim
+# Dockerfile
+
+# Use Python 3.10.8 runtime as a parent image
+FROM python:3.10.8-slim  # <--- Version updated here
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -12,7 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port the app runs on (used by Render)
-# PORT 8080 is often used, but Render will use the one set in the runtime
 ENV PORT=8080
 
 # Run the bot when the container starts
