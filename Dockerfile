@@ -16,5 +16,9 @@ COPY . .
 # Expose the port the app runs on (used by Render)
 ENV PORT=8080
 
-# Run the bot when the container starts
-CMD ["python", "bot.py"]
+# Dockerfile
+
+# ... (Installation steps)
+
+# Run the bot when the container starts using the explicit python3 command
+CMD ["python3", "bot.py"]
