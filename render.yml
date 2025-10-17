@@ -1,16 +1,19 @@
 version: 1
 services:
-  - type: worker       # <--- SERVICE TYPE बदला गया
-    name: telegram-polling-bot
+  - type: web
+    name: telegram-photo-bot
     env: python
-    # Build a Docker image using the Dockerfile
     dockerfilePath: Dockerfile
-    # Command to run the bot 
-    startCommand: python bot.py # <--- Simple start command
-    # Port की अब आवश्यकता नहीं है, क्योंकि यह Web Service नहीं है
+    startCommand: python bot.py
+    port: 8080 
     envVars:
       - key: BOT_TOKEN
-        sync: false # Set this in your Render dashboard for security
+        sync: false
+      - key: WEBHOOK_URL
+        fromService:
+          type: web
+          name: telegram-photo-bot
+          property: hostport
       - key: PYTHON_VERSION
-        value: 3.11.5
+        value: 3.10.8  # <--- Version updated here
         
