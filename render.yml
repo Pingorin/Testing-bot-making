@@ -1,0 +1,23 @@
+version: 1
+services:
+  - type: web
+    name: telegram-photo-bot
+    env: python
+    # Build a Docker image using the Dockerfile
+    dockerfilePath: Dockerfile
+    # Command to run the bot 
+    startCommand: python bot.py
+    # The port the service will listen on
+    port: 8080 
+    # Environment variables (secrets)
+    envVars:
+      - key: BOT_TOKEN
+        sync: false # Set this in your Render dashboard for security
+      - key: WEBHOOK_URL
+        # Render provides this automatically for web services
+        fromService:
+          type: web
+          name: telegram-photo-bot
+          property: hostport
+      - key: PYTHON_VERSION
+        value: 3.11.5
