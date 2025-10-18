@@ -1,24 +1,19 @@
-# Dockerfile
+# File: Dockerfile
 
-# Use Python 3.10.8 runtime as a parent image
-FROM python:3.10.8-slim  # <--- Version updated here
+# बेस इमेज के रूप में Python 3.10.8 का स्लिम वर्जन चुनें
+FROM python:3.10.8-slim
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# वर्किंग डायरेक्टरी सेट करें
+WORKDIR /app
 
-# Copy the dependency file and install dependencies
-COPY requirements.txt ./
+# requirements.txt को कॉपी करें
+COPY requirements.txt .
+
+# लाइब्रेरीज इनस्टॉल करें
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application code to the container
+# बाकी सभी फाइल्स को कॉपी करें
 COPY . .
 
-# Expose the port the app runs on (used by Render)
-ENV PORT=8080
-
-# Dockerfile
-
-# ... (Installation steps)
-
-# Run the bot when the container starts using the explicit python3 command
+# बॉट को चलाने के लिए कमांड
 CMD ["python3", "bot.py"]
