@@ -1,2 +1,7 @@
-# File: requirements.txt
-python-telegram-bot==21.0.1
+# requirements.txt
+
+pyrogram
+tgcrypto
+motor
+uvloop
+pyspellchecker
