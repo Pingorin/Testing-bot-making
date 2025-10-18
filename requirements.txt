@@ -1,7 +1,8 @@
 # requirements.txt
-
 pyrogram
 tgcrypto
 motor
 uvloop
 pyspellchecker
+Flask
+gunicorn
