@@ -1,9 +1,22 @@
-# File: render.yml
+# render.yml
+
 services:
   - type: worker
-    name: my-telegram-bot-py310
+    name: telegram-filter-bot
     env: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "python3 bot.py"
-    autoDeploy: false
-    
+    envVars:
+      - key: API_ID
+        value: "123456" # अपनी API ID यहाँ डालें
+      - key: API_HASH
+        value: "eb06d4abfb49dc3eeb1aeb98ae0f581e" # अपना API HASH यहाँ डालें
+      - key: BOT_TOKEN
+        value: "50a04ab22e0b3552dd351028a6d1a1c4" # अपना BOT TOKEN यहाँ डालें
+      - key: DB_URI
+        value: "mongodb://..." # अपना MongoDB URI यहाँ डालें
+      - key: ADMINS
+        value: "123456789" # अपनी एडमिन ID यहाँ डालें
+      - key: PYTHON_VERSION
+        value: 3.11.5
+        
