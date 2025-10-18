@@ -1,11 +1,11 @@
 # render.yml
-
 services:
-  - type: web
+  - type: web # 👈 इसे 'web' पर सेट करें
     name: telegram-filter-bot
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python3 bot.py"
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT bot:web_app"
+    healthCheckPath: /
     envVars:
       - key: API_ID
         value: "123456" # अपनी API ID यहाँ डालें
@@ -17,6 +17,8 @@ services:
         value: "mongodb://..." # अपना MongoDB URI यहाँ डालें
       - key: ADMINS
         value: "123456789" # अपनी एडमिन ID यहाँ डालें
+      - key: LOG_CHANNEL
+        value: "-100xxxxxxx"
       - key: PYTHON_VERSION
         value: 3.11.5
         
