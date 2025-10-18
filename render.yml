@@ -1,17 +1,9 @@
-version: 1
+# File: render.yml
 services:
-  - type: web        # <--- सुनिश्चित करें कि यह 'web' है
-    name: telegram-photo-bot
+  - type: worker
+    name: my-telegram-bot-py310
     env: python
-    dockerfilePath: Dockerfile
-    startCommand: python3 bot.py
-    port: 8080       # <--- Render को बताने के लिए कि यह port listen करेगा
-    envVars:
-      - key: BOT_TOKEN
-        sync: false # Security के लिए Render Dashboard में value सेट करें
-      - key: PYTHON_VERSION
-        value: 3.10.8
-      - key: PHOTO_URL
-        value: # Optional: यदि आप URL का उपयोग कर रहे हैं तो यहाँ सेट करें
-      # RENDER_EXTERNAL_URL Render खुद से inject करता है
-      
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 bot.py"
+    autoDeploy: false
+    
