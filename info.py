@@ -1,15 +1,16 @@
-# info.py
-
 import os
+from dotenv import load_dotenv
 
-# Telegram API Credentials
-API_ID = int(os.environ.get("API_ID", 123456))  # अपना API ID यहाँ डालें
-API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e") # अपना API HASH यहाँ डालें
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "50a04ab22e0b3552dd351028a6d1a1c4") # अपना BOT TOKEN यहाँ डालें
+load_dotenv()
+
+API_ID = int(os.environ.get("API_ID", 12345))
+API_HASH = os.environ.get("API_HASH", "your_api_hash")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "your_bot_token")
 
 # Database
-DB_URI = os.environ.get("DB_URI", "mongodb://<user>:<password>@<host>:<port>/<db_name>") # अपना MongoDB Connection String यहाँ डालें
+DB_URI = os.environ.get("DB_URI", "your_mongodb_connection_string")
+DB_NAME = os.environ.get("DB_NAME", "telegram_bot_db")
 
-# Other
-ADMINS = [int(admin) for admin in os.environ.get("ADMINS", "123456789").split()] # अपनी Telegram User ID यहाँ डालें
-LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-100xxxxxxxxx")) # Log भेजने के लिए चैनल ID
+# /start command ke liye
+START_PIC = os.environ.get("START_PIC", "https://example.com/your_photo.jpg")
+BOT_LINK = os.environ.get("BOT_LINK", "https://t.me/YourBotUsername")
