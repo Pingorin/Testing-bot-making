@@ -1,9 +1,22 @@
-# script.py
-
 class Script:
-    START_TXT = """नमस्ते {mention},
 
-मैं एक **फाइल स्टोर बॉट** हूँ। 🤖
+    START_TXT = """
+Hi {mention}!
+Main ek file filter bot hoon. Aap mujhe group mein add kar sakte hain ya yahaan PM mein search kar sakte hain.
+"""
+    
+    INDEX_START_TXT = """
+Channel mein total {total} files hain.
+Indexing shuru karne ke liye niche diye gaye button par click karein.
+"""
 
-आप यहाँ फिल्में और फाइलें खोज सकते हैं। बस मुझे फाइल का नाम भेजें।"""
+    INDEX_PROGRESS_TXT = """
+Indexing jaari hai...
+
+Total Files: {total}
+Recieved: {current}
+Saved: {saved}
+Duplicate Skipped: {duplicate}
+Unsupported: {unsupported}
+"""
     
