@@ -19,9 +19,10 @@ async def start_command(client, message: Message):
     )
 
 # Search handler (Group aur PM dono ke liye)
-@Client.on_message(filters.text & (filters.private | filters.group) & ~filters.command())
+@Client.on_message(filters.text & (filters.private | filters.group) & ~filters.command("some_dummy_command"))
 async def search_query(client, message: Message):
-    query_txt = message.text
+    # ... baki code same rahega ...
+    pass
     
     # 3. Spelling Check (Basic) 
     # spell = SpellChecker()
