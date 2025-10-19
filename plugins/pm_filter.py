@@ -1,34 +1,12 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from info import START_PIC, BOT_LINK
-from script import Script
 from database.ia_filter import find_files, get_file_by_id
-# from pyspellchecker import SpellChecker # Uncomment agar spelling check use karna hai
 
-# /start command handler
-@Client.on_message(filters.command("start") & filters.private)
-async def start_command(client, message: Message):
-    await message.reply_photo(
-        photo=START_PIC,
-        caption=Script.START_TXT.format(mention=message.from_user.mention),
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("Bot Link", url=BOT_LINK)]
-            ]
-        )
-    )
-
-# Search handler (Group aur PM dono ke liye)
-@Client.on_message(filters.text & (filters.private | filters.group) & ~filters.command("some_dummy_command"))
+# Search handler (Group aur PM dono ke liye, aur commands ko exclude karne ke liye)
+# filters.command("start") is used as a dummy argument to satisfy Pyrogram's filter requirement
+@Client.on_message(filters.text & (filters.private | filters.group) & ~filters.command("start"))
 async def search_query(client, message: Message):
-    # ... baki code same rahega ...
-    pass
-    
-    # 3. Spelling Check (Basic) 
-    # spell = SpellChecker()
-    # corrected_query = spell.correction(query_txt)
-    # if corrected_query != query_txt:
-    #     await message.reply_text(f"Kya aapka matlab tha: `{corrected_query}`?")
+    query_txt = message.text
     
     # 4. Files search karna
     files, total_results = await find_files(query_txt, max_results=10, page=0)
@@ -45,10 +23,9 @@ async def search_query(client, message: Message):
     
     # Pagination buttons
     if total_results > 10:
+        # Placeholder for pagination logic (Next/Back buttons)
         buttons.append(
             [
-                # Back button (disabled on page 0)
-                # InlineKeyboardButton("Back", callback_data="page_back_0"), 
                 InlineKeyboardButton(f"Page 1/{(total_results // 10) + 1}", callback_data="noop"),
                 InlineKeyboardButton("Next", callback_data=f"page_next_1_{query_txt}")
             ]
@@ -74,12 +51,10 @@ async def get_file_handler(client, query):
             caption=file_info.get('caption', ''),
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("Join Channel", url="https://t.me/your_channel_link")]
+                    [InlineKeyboardButton("Join Channel", url="[https://t.me/your_channel_link](https://t.me/your_channel_link)")]
                 ]
             )
         )
         await query.answer("File aapke PM mein bhej di gayi hai!", show_alert=True)
     except Exception as e:
         await query.answer(f"Error: {e}. Kya aapne bot ko PM mein start kiya hai?", show_alert=True)
-
-# (Aapko pagination ("page_next_") ke liye bhi callback handler banana hoga)
