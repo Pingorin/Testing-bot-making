@@ -1,8 +1,6 @@
-# requirements.txt
-pyrogram
+pyrogram[FastRequest]
 tgcrypto
-motor
-uvloop
+pymongo[srv]
+flask
+python-dotenv
 pyspellchecker
-Flask
-gunicorn
